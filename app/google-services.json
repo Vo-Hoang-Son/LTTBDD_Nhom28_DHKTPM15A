@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "513909230088",
+    "project_id": "planapp-nhom28-mobile",
+    "storage_bucket": "planapp-nhom28-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513909230088:android:d1494eb65b443ccebd1fbd",
+        "android_client_info": {
+          "package_name": "com.example.planapp_nhom28_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513909230088-4dj6hgieqk2ggqak1jpb6837uorhe7s7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_503WtVDG0vDFVfDSefhj_b5ldNgHc3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513909230088-4dj6hgieqk2ggqak1jpb6837uorhe7s7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

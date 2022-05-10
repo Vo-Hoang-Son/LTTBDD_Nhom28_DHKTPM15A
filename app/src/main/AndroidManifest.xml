@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.planapp_nhom28_mobile">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/edit"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PlanAppNhom28Mobile">
+        <activity android:name="com.example.planapp_nhom28_mobile.plandetails"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:exported="false"
+            ></activity>
+        <activity android:name="com.example.planapp_nhom28_mobile.EditPlanActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:exported="false"
+            />
+        <activity
+            android:name="com.example.planapp_nhom28_mobile.CreatePlanActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.example.planapp_nhom28_mobile.PlanActivity"
+            android:exported="false"
+            />
+        <activity
+            android:name="com.example.planapp_nhom28_mobile.fogotpassword"
+            android:exported="false"
+            />
+        <activity
+            android:name="com.example.planapp_nhom28_mobile.register"
+            android:exported="false"
+            />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
