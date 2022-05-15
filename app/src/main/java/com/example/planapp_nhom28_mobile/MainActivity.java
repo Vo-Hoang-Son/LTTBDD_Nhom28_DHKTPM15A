@@ -23,6 +23,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText mloginemail,mloginpassword;
@@ -130,9 +132,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-
-
-
                 }
             }
         });
@@ -158,7 +157,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void addSushiToLocalUsingRoom(List<Plan> arrPlan) {
+        for (Plan p: arrPlan) {
+            PlanDB.getInstance(this).planDao().insertPlan(p);
+        }
+    }
 
+    public List<Plan> getAllSushiFromLocal () {
+        return PlanDB.getInstance(this).planDao().getAll();
+    }
 
 
 }
