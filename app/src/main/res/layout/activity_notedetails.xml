@@ -6,20 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.example.planapp_nhom28_mobile.plandetails">
 
-
-        <TextView
-            android:id="@+id/titleofnotedetail"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_toEndOf="@+id/btnReturn"
-            android:hint="Nhập tiêu đề kế hoạch của bạn tại đây"
-            android:paddingTop="12dp"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/titleofnotedetail"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toEndOf="@+id/btnReturn"
+        android:hint="Nhập tiêu đề kế hoạch của bạn tại đây"
+        android:paddingTop="12dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:ignore="DuplicateIds" />
 
     <TextView
         android:id="@+id/contentofnotedetail"
