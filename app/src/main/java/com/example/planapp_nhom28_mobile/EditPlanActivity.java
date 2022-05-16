@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.module.AppGlideModule;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -104,51 +106,20 @@ public class EditPlanActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    SimpleDateFormat dt = new SimpleDateFormat("EEE dd/MM/yyyy hh:mm:ss");
-                    SimpleDateFormat dt1 = new SimpleDateFormat("EEE_dd-MM-yyyy_hh:mm:ss");
+                    SimpleDateFormat dt = new SimpleDateFormat("EEE dd/MM/yyyy hh:mm:ss aa");
+                    SimpleDateFormat dt1 = new SimpleDateFormat("EEE_dd-MM-yyyy_hh:mm:ss_aa");
                     String tg = dt1.format(new java.util.Date());
                     DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("plan").document(data.getStringExtra("noteId"));
                     Map<String,Object> note=new HashMap<>();
                     note.put("title",newtitle);
                     note.put("content",newcontent);
                     note.put("time", dt.format(new java.util.Date()));
-                    DocumentReference documentReferenceImg = documentReference.collection("image").document();
+                    //DocumentReference documentReferenceImg = documentReference.collection("image").document();
                     //note.put("url", documentReferenceImg.set(filePath.getPath()));
-                    reference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(data.getStringExtra("noteId"));
-                    final StorageReference fileRef = reference.child("Plan." + getFileExtension(filePath));
-                    fileRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-
-                                    Plan model = new Plan(uri.toString());
-                                    //s = uri.toString();
-                                    //String modelId = root.push().getKey();
-                                    // DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("plan").document();
-                                    //DocumentReference documentReferenceImg = documentReference.collection("image").document();
-                                    //reference.setValue(model);
-                                    //documentReferenceImg.set(model);
-                                    mprogressbarofcreatenote.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(EditPlanActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                                    //imgPlan.setImageResource(R.drawable.ic_baseline_add_photo_alternate_24);
-                                }
-                            });
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                            mprogressbarofcreatenote.setVisibility(View.VISIBLE);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            mprogressbarofcreatenote.setVisibility(View.INVISIBLE);
-                            Toast.makeText(EditPlanActivity.this, "Uploading Failed !!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    note.put("UrlImg", filePath);
+                   /* if(filePath != null)
+                        note.put("UrlImg", filePath);
+                    else*/
+                        note.put("UrlImg", data.getStringExtra("UrlImg"));
                     documentReference.set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -161,6 +132,43 @@ public class EditPlanActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),"Failed To update",Toast.LENGTH_SHORT).show();
                         }
                     });
+
+                        reference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(data.getStringExtra("noteId"));
+                        final StorageReference fileRef = reference.child("Plan.jpg"); //+ getFileExtension(filePath));
+                    if(filePath != null) {
+                        fileRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+
+                                        Plan model = new Plan(uri.toString());
+                                        //s = uri.toString();
+                                        //String modelId = root.push().getKey();
+                                        // DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("plan").document();
+                                        //DocumentReference documentReferenceImg = documentReference.collection("image").document();
+                                        //reference.setValue(model);
+                                        //documentReferenceImg.set(model);
+                                        mprogressbarofcreatenote.setVisibility(View.INVISIBLE);
+                                        Toast.makeText(EditPlanActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                        //imgPlan.setImageResource(R.drawable.ic_baseline_add_photo_alternate_24);
+                                    }
+                                });
+                            }
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                                mprogressbarofcreatenote.setVisibility(View.VISIBLE);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                mprogressbarofcreatenote.setVisibility(View.INVISIBLE);
+                                Toast.makeText(EditPlanActivity.this, "Uploading Failed !!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
 
             }
@@ -173,7 +181,7 @@ public class EditPlanActivity extends AppCompatActivity {
         meditcontentofnote.setText(notecontent);
         medittitleofnote.setText(notetitle);
         // Reference to an image file in Cloud Storage
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(String.valueOf(data.getStringExtra("noteId"))+"/Plan.jpg");
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(data.getStringExtra("noteId")+"/Plan.jpg");
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -183,16 +191,18 @@ public class EditPlanActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 //Toast.makeText(getApplicationContext(),"Error: not load image",Toast.LENGTH_SHORT).show();
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(String.valueOf(data.getStringExtra("noteId"))+"/Plan.png");
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(data.getStringExtra("noteId")+"/Plan.png");
             }
         });
         // Download directly from StorageReference using Glide
         // (See MyAppGlideModule for Loader registration)
-        Glide.with(this /* context */)
+        MyAppGlideModule module= new MyAppGlideModule();
+        Glide.with(EditPlanActivity.this /* context */)
                 .load(storageReference)
                 .into(imgPlan);
 
     }
+
 
     public void addSushiToLocalUsingRoom(List<Plan> arrPlan) {
         for (Plan p: arrPlan) {

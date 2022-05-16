@@ -116,8 +116,8 @@ public class CreatePlanActivity extends AppCompatActivity {
                 {
 
                     mprogressbarofcreatenote.setVisibility(View.VISIBLE);
-                    SimpleDateFormat dt = new SimpleDateFormat("EEE dd/MM/yyyy hh:mm:ss");
-                    SimpleDateFormat dt1 = new SimpleDateFormat("EEE_dd-MM-yyyy_hh:mm:ss");
+                    SimpleDateFormat dt = new SimpleDateFormat("EEE dd/MM/yyyy hh:mm:ss aa");
+                    SimpleDateFormat dt1 = new SimpleDateFormat("EEE_dd-MM-yyyy_hh:mm:ss_aa");
                     String tg = dt1.format(new java.util.Date());
                     DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("plan").document(tg);
                     //DocumentReference documentReferenceImg=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("plan").document();
@@ -127,9 +127,26 @@ public class CreatePlanActivity extends AppCompatActivity {
                     note.put("time", dt.format(new java.util.Date()));
                     DocumentReference documentReferenceImg = documentReference.collection("image").document();
                     //note.put("url", documentReferenceImg.set(filePath.getPath()));
+
+                    note.put("UrlImg", filePath);
+
+                    documentReference.set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(),"Note Created Succesffuly",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(CreatePlanActivity.this, PlanActivity.class));
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(),"Failed To Create Note"+firebaseUser.getUid()+"  "+content,Toast.LENGTH_SHORT).show();
+                            mprogressbarofcreatenote.setVisibility(View.INVISIBLE);
+                           // startActivity(new Intent(createnote.this,notesactivity.class));
+                        }
+                    });
                     reference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(tg);
                     //final StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(filePath));
-                    final StorageReference fileRef = reference.child("Plan." + getFileExtension(filePath));
+                    final StorageReference fileRef = reference.child("Plan.jpg"); //+ getFileExtension(filePath));
                     fileRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -160,22 +177,6 @@ public class CreatePlanActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             mprogressbarofcreatenote.setVisibility(View.INVISIBLE);
                             Toast.makeText(CreatePlanActivity.this, "Uploading Failed !!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    note.put("UrlImg", filePath);
-
-                    documentReference.set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(),"Note Created Succesffuly",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(CreatePlanActivity.this, PlanActivity.class));
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(),"Failed To Create Note"+firebaseUser.getUid()+"  "+content,Toast.LENGTH_SHORT).show();
-                            mprogressbarofcreatenote.setVisibility(View.INVISIBLE);
-                           // startActivity(new Intent(createnote.this,notesactivity.class));
                         }
                     });
                 }
