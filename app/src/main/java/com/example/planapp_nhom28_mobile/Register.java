@@ -28,7 +28,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class register extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class Register extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
 
     private EditText msignupemail,msignuppassword, msignupname, msignuprepass;
@@ -53,7 +53,7 @@ public class register extends AppCompatActivity implements GoogleApiClient.OnCon
         // Check for existing Google Sign In account, if the user is already signed in
 // the GoogleSignInAccount will be non-null.
         super.onStart();
-        account = GoogleSignIn.getLastSignedInAccount(register.this);
+        account = GoogleSignIn.getLastSignedInAccount(Register.this);
         //updateUI(account);
     }
 
@@ -73,11 +73,11 @@ public class register extends AppCompatActivity implements GoogleApiClient.OnCon
                 .build();
 
         // Build a GoogleSignInClient with the options specified by gso.
-        googleApiClient=new GoogleApiClient.Builder(register.this)
-                .enableAutoManage(register.this, register.this)
+        googleApiClient=new GoogleApiClient.Builder(Register.this)
+                .enableAutoManage(Register.this, Register.this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(register.this, gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(Register.this, gso);
 
         ImageView img = findViewById(R.id.imgRegisterGoogle);
         img.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +104,7 @@ public class register extends AppCompatActivity implements GoogleApiClient.OnCon
         mgotologin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(register.this, MainActivity.class);
+                Intent intent=new Intent(Register.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -191,14 +191,14 @@ public class register extends AppCompatActivity implements GoogleApiClient.OnCon
 
     private void handleSignInResult(GoogleSignInResult result){
         if(result.isSuccess()){
-            new register();
-            account = GoogleSignIn.getLastSignedInAccount(register.this);
+            new Register();
+            account = GoogleSignIn.getLastSignedInAccount(Register.this);
             msignupname.setText(account.getDisplayName());
             msignupemail.setText(account.getEmail());
             msignuppassword.requestFocus();
-            Toast.makeText(register.this,"Thông tin từ tài khoản google lấy thành công."+account.getEmail(),Toast.LENGTH_LONG).show();
+            Toast.makeText(Register.this,"Thông tin từ tài khoản google lấy thành công."+account.getEmail(),Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(register.this,"Thông tin từ tài khoản google lấy không thành công.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Register.this,"Thông tin từ tài khoản google lấy không thành công.",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -219,7 +219,7 @@ public class register extends AppCompatActivity implements GoogleApiClient.OnCon
                     Toast.makeText(getApplicationContext(),"Xác minh email đã được gửi, vui lòng nhấn vào đường link trong email và dăng nhập lại.",Toast.LENGTH_SHORT).show();
                     firebaseAuth.signOut();
                     finish();
-                    startActivity(new Intent(register.this, MainActivity.class));
+                    startActivity(new Intent(Register.this, MainActivity.class));
                 }
             });
         }

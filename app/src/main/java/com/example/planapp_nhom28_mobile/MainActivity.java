@@ -83,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
         mgotosignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, register.class));
+                startActivity(new Intent(MainActivity.this, Register.class));
             }
         });
 
         mgotoforgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, com.example.planapp_nhom28_mobile.fogotpassword.class));
+                startActivity(new Intent(MainActivity.this, Fogotpassword.class));
             }
         });
 

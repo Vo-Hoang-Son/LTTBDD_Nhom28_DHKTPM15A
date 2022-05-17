@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class plandetails extends AppCompatActivity {
+public class Plandetails extends AppCompatActivity {
 
 
     private TextView mtitleofnotedetail,mcontentofnotedetail;
@@ -29,7 +29,7 @@ public class plandetails extends AppCompatActivity {
         btnreturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(plandetails.this, PlanActivity.class);
+                Intent intent = new Intent(Plandetails.this, PlanActivity.class);
                 startActivity(intent);
             }
         });

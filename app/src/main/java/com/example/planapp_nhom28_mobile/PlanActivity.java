@@ -100,7 +100,7 @@ public class PlanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //we have to open note detail activity
-                        Intent intent=new Intent(v.getContext(), plandetails.class);
+                        Intent intent=new Intent(v.getContext(), Plandetails.class);
                         intent.putExtra("title",firebasemodel.getTitle());
                         intent.putExtra("content",firebasemodel.getContent());
                         intent.putExtra("time", firebasemodel.getTime());
@@ -139,7 +139,7 @@ public class PlanActivity extends AppCompatActivity {
                                 documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(v.getContext(),"This note is deleted",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(v.getContext(),"This plan is deleted",Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

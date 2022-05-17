@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanAppNhom28Mobile">
-        <activity android:name="com.example.planapp_nhom28_mobile.plandetails"
+        <activity android:name="com.example.planapp_nhom28_mobile.Plandetails"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:exported="false"
             ></activity>
@@ -25,11 +25,11 @@
             android:exported="false"
             />
         <activity
-            android:name="com.example.planapp_nhom28_mobile.fogotpassword"
+            android:name="com.example.planapp_nhom28_mobile.Fogotpassword"
             android:exported="false"
             />
         <activity
-            android:name="com.example.planapp_nhom28_mobile.register"
+            android:name="com.example.planapp_nhom28_mobile.Register"
             android:exported="false"
             />
         <activity

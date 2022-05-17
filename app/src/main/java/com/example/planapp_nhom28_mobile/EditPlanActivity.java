@@ -204,13 +204,13 @@ public class EditPlanActivity extends AppCompatActivity {
     }
 
 
-    public void addSushiToLocalUsingRoom(List<Plan> arrPlan) {
+    public void addPlanToLocalUsingRoom(List<Plan> arrPlan) {
         for (Plan p: arrPlan) {
             PlanDB.getInstance(this).planDao().insertPlan(p);
         }
     }
 
-    public List<Plan> getAllSushiFromLocal () {
+    public List<Plan> getAllPlanFromLocal () {
         return PlanDB.getInstance(this).planDao().getAll();
     }
 

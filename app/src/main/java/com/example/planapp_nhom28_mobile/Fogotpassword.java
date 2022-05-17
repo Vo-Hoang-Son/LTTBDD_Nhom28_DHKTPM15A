@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class fogotpassword extends AppCompatActivity {
+public class Fogotpassword extends AppCompatActivity {
 
     private EditText mforgotpassword;
     private Button mpasswordrecoverbutton;
@@ -40,7 +40,7 @@ public class fogotpassword extends AppCompatActivity {
         mgobacktologin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(fogotpassword.this,MainActivity.class);
+                Intent intent=new Intent(Fogotpassword.this,MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,7 +65,7 @@ public class fogotpassword extends AppCompatActivity {
                             {
                                 Toast.makeText(getApplicationContext(),"Mail Sent , You can recover your password using mail",Toast.LENGTH_SHORT).show();
                                 finish();
-                                startActivity(new Intent(fogotpassword.this,MainActivity.class));
+                                startActivity(new Intent(Fogotpassword.this,MainActivity.class));
                             }
                             else
                             {
