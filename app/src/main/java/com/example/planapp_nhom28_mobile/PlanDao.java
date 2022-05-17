@@ -19,8 +19,8 @@ public interface PlanDao {
     @Query("SELECT * FROM 'Plan' WHERE uid = :uid")
     Plan getPlanFromId(int uid);
 
-    @Delete
-    void deletePlan(int uid);
+    /*@Delete
+    void deletePlan(int uid);*/
 
     @Update
     void updatePlan(Plan plan);

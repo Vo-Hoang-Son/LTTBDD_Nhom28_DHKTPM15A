@@ -134,9 +134,12 @@ public class EditPlanActivity extends AppCompatActivity {
                     });
 
                         reference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(data.getStringExtra("noteId"));
-                        final StorageReference fileRef = reference.child("Plan.jpg"); //+ getFileExtension(filePath));
+                        StorageReference fileRef = reference.child("Plan.jpg"); //+ getFileExtension(filePath));
                     if(filePath != null) {
-                        fileRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        fileRef.delete();
+                        reference = FirebaseStorage.getInstance().getReference(firebaseUser.getUid()).child(data.getStringExtra("noteId"));
+                        StorageReference fileRef1 = reference.child("Plan.jpg");
+                        fileRef1.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
